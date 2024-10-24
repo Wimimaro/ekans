@@ -15,6 +15,8 @@ var dy = 0;
 
 var score = 0;
 
+var body = [];
+
 window.onload = function() {
     plateau = document.getElementById("board");
     plateau.height = lignes * boxsize;
@@ -30,20 +32,35 @@ function update() {
     serpentX += dx;
     serpentY += dy;
 
+   
     context.fillStyle="black";
     context.fillRect(0, 0, plateau.width, plateau.height);
 
     context.fillStyle="red";
     context.fillRect(fruitX, fruitY, boxsize, boxsize);
 
-    context.fillStyle="lime";
-    context.fillRect(serpentX, serpentY, boxsize, boxsize);
-
     if(serpentX == fruitX && serpentY == fruitY){
         gestionscore();
         context.clearRect(fruitX,fruitY,boxsize,boxsize);
+        body.push(fruitX,fruitY);
         generatefruit();
     }
+
+    for (let i = body.length-1; i > 0; i--) {
+        body[i] = body[i-1];
+    }
+
+    if (body.length) {
+        body[0] = [serpentX, serpentY];
+    }
+
+    context.fillStyle="lime";
+    context.fillRect(serpentX, serpentY, boxsize, boxsize);
+    for(let i = 0; i < body.length; i++) {
+        context.fillRect(body[i][0], body[i][1], boxsize, boxsize);
+    }
+
+    
 }
 
 function generatefruit(){
