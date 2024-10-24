@@ -52,19 +52,19 @@ function generatefruit(){
 }
 
 function deplacement(e){
-    if(e.code === "ArrowUp"){
+    if(e.code === "ArrowUp" && dy == 0){
         dx = 0;
         dy = -boxsize;
     }
-    if(e.code == "ArrowDown"){
+    if(e.code == "ArrowDown" && dy == 0){
         dx = 0;
         dy = boxsize;
     }
-    if(e.code == "ArrowLeft"){
+    if(e.code == "ArrowLeft" && dx == 0){
         dx = -boxsize;
         dy = 0;
     }
-    if(e.code == "ArrowRight"){
+    if(e.code == "ArrowRight" && dx == 0){
         dx = boxsize;
         dy = 0;
     }
